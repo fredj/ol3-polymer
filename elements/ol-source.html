@@ -1,0 +1,83 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-source-osm">
+  <script>
+    Polymer('ol-source-osm', {
+      ready: function() {
+        this.source = new ol.source.OSM();
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="ol-source-bing" attributes="key imagerySet">
+  <script>
+    Polymer('ol-source-bing', {
+      imagerySet: 'Road',
+      ready: function() {
+        this.source = new ol.source.BingMaps({
+          key: this.key,
+          imagerySet: this.imagerySet
+        });
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="ol-source-stamen" attributes="layer">
+  <script>
+    Polymer('ol-source-stamen', {
+      ready: function() {
+        this.source = new ol.source.Stamen({
+          layer: this.layer
+        });
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="ol-source-mapbox" attributes="layer">
+  <script>
+    Polymer('ol-source-mapbox', {
+      ready: function() {
+        this.source = new ol.source.TileJSON({
+          url: 'http://api.tiles.mapbox.com/v3/' + this.layer + '.jsonp',
+          crossOrigin: 'anonymous'
+        });
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="ol-source-kml" attributes="projection url">
+  <script>
+    Polymer('ol-source-kml', {
+      ready: function() {
+        this.source = new ol.source.KML({
+          projection: this.projection,
+          url: this.url,
+        });
+      }
+    });
+  </script>
+</polymer-element>
+
+<polymer-element name="ol-source-vector">
+  <template>
+    <content id="features" select="ol-feature"></content>
+  </template>
+  <script>
+    Polymer('ol-source-vector', {
+      ready: function() {
+        this.source = new ol.source.Vector();
+        // FIXME: this.onMutation();
+      },
+      domReady: function() {
+        var features = this.$.features.getDistributedNodes();
+        for (var i = 0, ii = features.length; i < ii; i++) {
+          this.source.addFeature(features[i].feature);
+        }
+      }
+    });
+  </script>
+</polymer-element>

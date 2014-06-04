@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-layer-vector">
+  <script>
+    Polymer('ol-layer-vector', {
+      domReady: function() {
+        // FIXME: assert this.children.length == 1
+        var source = this.children.item(0);
+        // FIXME: check source type
+        this.layer = new ol.layer.Vector({
+          source: source.source
+        });
+        // FIXME: this.onMutation();
+        // FIXME: style function
+      },
+      observe: {
+      }
+    });
+  </script>
+</polymer-element>

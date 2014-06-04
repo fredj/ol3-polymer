@@ -1,0 +1,14 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-geom-point" attributes="coordinates">
+  <script>
+    Polymer('ol-geom-point', {
+      created: function() {
+        this.coordinates = [];
+      },
+      ready: function() {
+        this.geometry = new ol.geom.Point(this.coordinates);
+      }
+    });
+  </script>
+</polymer-element>

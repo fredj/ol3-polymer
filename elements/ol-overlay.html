@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-overlay" attributes="position">
+  <template>
+    <style>
+      /* FIXME FOUC */
+    </style>
+  </template>
+  <script>
+    Polymer('ol-overlay', {
+      created: function() {
+        // type hint
+        this.position = [];
+      },
+      domReady: function() {
+        // assert this.children.length == 1
+        this.overlay = new ol.Overlay({
+          position: this.position,
+          element: this.children.item(0),
+        });
+      },
+      observe: {
+        'position': function(oldValue, newValue) {
+          if (this.overlay) {
+            this.overlay.setPosition(newValue);
+          }
+        }
+      }
+    });
+  </script>
+</polymer-element>

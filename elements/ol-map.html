@@ -1,0 +1,57 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-map">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div id="map"></div>
+    <content id="views" select="ol-view"></content>
+    <content id="overlays" select="ol-overlay"></content>
+    <content id="layers" select="ol-layer-tile, ol-layer-vector"></content>
+  </template>
+  <script>
+    Polymer('ol-map', {
+      ready: function() {
+        this.map = new ol.Map({
+          target: this.$.map
+        });
+
+        this.onMutation(this, this.childrenUpdated);
+      },
+      childrenUpdated: function(observer, mutations) {
+        for (var i = 0, ii = mutations.length; i < ii; i++) {
+          var mutation = mutations[i];
+          // FIXME: add / remove layer
+        }
+        this.onMutation(this, this.childrenUpdated);
+      },
+      domReady: function() {
+        var views = this.$.views.getDistributedNodes();
+        // FIXME: assert views.length == 1
+        if (views.length) {
+          this.view = views.item(0);
+        }
+
+        // FIXME: update this.overlays
+        var overlays = this.$.overlays.getDistributedNodes();
+        for (var i = 0, ii = overlays.length; i < ii; i++) {
+          this.map.addOverlay(overlays[i].overlay);
+        }
+
+        // FIXME: update this.layers
+        var layers = this.$.layers.getDistributedNodes();
+        for (var i = 0, ii = layers.length; i < ii; i++) {
+          this.map.addLayer(layers[i].layer);
+        }
+      },
+      observe: {
+        'view': function(oldValue, newValue) {
+          this.map.setView(newValue.view);
+        }
+      }
+    });
+  </script>
+</polymer-element>

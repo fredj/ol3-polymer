@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-view" attributes="center zoom rotation">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+  </template>
+  <script>
+    Polymer('ol-view', {
+      created: function() {
+        // type hints
+        this.center = [];
+        this.zoom = 0;
+        this.rotation = 0;
+      },
+      ready: function() {
+        this.view = new ol.View2D();
+        //this.view.on('propertychange', function(event) {});
+      },
+      observe: {
+        'center': function(oldValue, newValue) {
+          this.view.setCenter(newValue);
+        },
+        'zoom': function(oldValue, newValue) {
+          this.view.setZoom(newValue);
+        },
+        'rotation': function(oldValue, newValue) {
+          this.view.setRotation(newValue);
+        }
+      }
+    });
+  </script>
+</polymer-element>

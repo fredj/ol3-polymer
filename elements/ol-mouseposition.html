@@ -1,0 +1,17 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-control-mouseposition">
+  <template>
+    
+  </template>
+  <script>
+    Polymer('ol-control-mouseposition', {
+      created: function() {
+        this.coordinates = [];
+      },
+      ready: function() {
+        this.geometry = new ol.geom.Point(this.coordinates);
+      }
+    });
+  </script>
+</polymer-element>

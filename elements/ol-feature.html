@@ -1,0 +1,18 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-feature">
+  <script>
+    Polymer('ol-feature', {
+      ready: function() {
+        this.feature = new ol.Feature(this.dataset);
+      },
+      domReady: function() {
+        // FIXME: assert this.children.length == 1
+        var geometry = this.children.item(0);
+        if (geometry) {
+          this.feature.setGeometry(geometry.geometry);
+        }
+      }
+    });
+  </script>
+</polymer-element>

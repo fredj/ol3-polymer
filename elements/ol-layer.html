@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ol-layer-tile" attributes="opacity visible">
+  <script>
+    Polymer('ol-layer-tile', {
+      opacity: 1.0,
+      visible: true,
+      domReady: function() {
+        // FIXME: assert this.children.length == 1
+        var source = this.children.item(0);
+        // FIXME: check source type
+        this.layer = new ol.layer.Tile({
+          source: source.source,
+          opacity: this.opacity,
+          visible: this.visible
+        });
+        // FIXME: this.onMutation();
+      },
+      observe: {
+        'opacity': function(oldValue, newValue) {
+          if (this.layer) {
+            this.layer.setOpacity(newValue);
+          }
+        },
+        'visible': function(oldValue, newValue) {
+          if (this.layer) {
+            this.layer.setVisible(newValue);
+          }
+        }
+      }
+    });
+  </script>
+</polymer-element>

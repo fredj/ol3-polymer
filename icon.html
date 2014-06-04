@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="bower_components/platform/platform.js"></script>
+    <script src="http://ol3js.org/en/master/build/ol.js"></script>
+    <link rel="import" href="elements/ol-view.html">
+    <link rel="import" href="elements/ol-layer.html">
+    <link rel="import" href="elements/ol-layer-vector.html">
+    <link rel="import" href="elements/ol-source.html">
+    <link rel="import" href="elements/ol-geometry.html">
+    <link rel="import" href="elements/ol-feature.html">
+    <link rel="import" href="elements/ol-map.html">
+    <style>
+      .map {
+        width: 100%;
+        height: 400px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <ol-map class="map">
+      <ol-view id="view" center="[0, 0]" zoom="3"></ol-view>
+      <ol-layer-tile>
+        <ol-source-mapbox layer="mapbox.geography-class"></ol-source-mapbox>
+      </ol-layer-tile>
+
+      <ol-layer-vector>
+        <ol-source-vector>
+          <ol-feature data-name="Null Island" data-population="4000">
+            <ol-geom-point coordinates="[0, 0]" />
+          </ol-feature>
+          <ol-feature>
+            <!-- london -->
+            <ol-geom-point coordinates="[-14198, 6711510]" />
+          </ol-feature>
+        </ol-source-vector>
+      </ol-layer-vector>
+
+    </ol-map>
+
+  </body>
+</html>
