@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-selector/core-selector.html">
+<link rel="import" href="bower_components/core-item/core-item.html">
+
+<polymer-element name="app-layer-list" attributes="layers">
+  <template>
+    <core-selector id="selector">
+      <template repeat="{{layer in layers}}">
+        <!-- <div> -->
+        <!--   <label><input type="checkbox" checked="{{layer.visible}}">{{layer | prop('label')}}</label> -->
+        <!-- </div> -->
+        <core-item label="{{layer | prop('label')}}"></core-item>
+      </template>
+    </core-selector>
+
+  </template>
+  <script>
+    Polymer({
+
+      layers: [],
+
+      ready: function() {
+        // var layers = this.layers;
+        // this.$.selector.addEventListener('core-select', function(event) {
+        //   var index = event.target.items.indexOf(event.detail.item);
+        //   layers[index].visible = event.detail.isSelected;
+        // });
+      },
+      prop: function(obj, key) {
+        return obj.get(key);
+      }
+    });
+  </script>
+</polymer-element>

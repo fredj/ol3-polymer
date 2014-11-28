@@ -1,0 +1,27 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+
+<polymer-element name="app-search" attributes="active">
+  <template>
+    <style>
+      input {
+        width: 100%;
+        display: none;
+      }
+      input[active] {
+        display: inherit;
+      }
+    </style>
+    <core-icon-button icon="search" on-tap="{{toggleActive}}"></core-icon-button>
+    <input type="text" active?="{{active}}">
+  </template>
+  <script>
+    Polymer({
+      active: false,
+
+      toggleActive: function() {
+        this.active = !this.active;
+      }
+    });
+  </script>
+</polymer-element>

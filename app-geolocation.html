@@ -1,0 +1,44 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="bower_components/core-icons/maps-icons.html">
+
+<polymer-element name="app-geolocation" extends="paper-fab" attributes="map">
+  <script>
+    Polymer({
+
+      icon: 'maps:my-location',
+
+      ready: function() {
+        this.geolocation = new ol.Geolocation();
+        this.geolocation.on('change:position', this.onGeolocationChange.bind(this));
+        // FIXME: handle error
+      },
+
+      attached: function() {
+        this.geolocation.projection = this.map.view.projection;
+        this.addEventListener('tap', this.recenter);
+      },
+
+      detached: function() {
+        this.geolocation.tracking = false;
+      },
+
+      recenter: function() {
+        this.geolocation.tracking = true;
+        this.loading = true;
+      },
+
+      onGeolocationChange: function(event) {
+        if (this.loading) {
+          this.map.view.center = this.geolocation.position;
+          // FIXME: set zoom
+          // FIXME: animate
+          this.loading = false;
+        }
+        // FIXME: fire event
+        // FIXME: update marker
+      }
+
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,45 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<script src="http://openlayers.org/en/master/build/ol.js"></script>
+
+<polymer-element name="app-map" attributes="map">
+  <template>
+    <div fit id="map"></div>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+
+      map: null,
+
+      ready: function() {
+        this.map = new ol.Map({
+          controls: [],
+          target: this.$.map,
+          layers: [
+            new ol.layer.Tile({
+              label: 'osm',
+              visible: true,
+              source: new ol.source.OSM()
+            }),
+            new ol.layer.Tile({
+              label: 'stamen watercolor',
+              visible: false,
+              source: new ol.source.Stamen({
+                layer: 'watercolor'
+              })
+            })
+          ],
+          view: new ol.View({
+            center: [907700, 5890660],
+            zoom: 8,
+            rotation: Math.PI / 3
+          })
+        });
+      },
+      attached: function() {
+        this.map.updateSize();
+      }
+
+    });
+  </script>
+</polymer-element>

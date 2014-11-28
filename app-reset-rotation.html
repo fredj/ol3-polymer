@@ -1,0 +1,46 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="bower_components/core-icons/maps-icons.html">
+
+<polymer-element name="app-reset-rotation" extends="paper-fab" attributes="map">
+  <!-- <template> -->
+  <!--   <shadow></shadow> -->
+  <!-- </template> -->
+  <script>
+    Polymer({
+
+      // default fab icon
+      icon: 'maps:navigation',
+
+      /**
+       * The duration of the animation in milliseconds. Default is `250`.
+       * @type {number}
+       */
+      duration: 250,
+
+      ready: function() {
+        this.addEventListener('tap', this.rotateNorth);
+      },
+
+      rotateNorth: function() {
+        var rotation = this.map.view.rotation;
+        while (rotation < -Math.PI) {
+          rotation += 2 * Math.PI;
+        }
+        while (rotation > Math.PI) {
+          rotation -= 2 * Math.PI;
+        }
+
+        this.map.beforeRender(
+          ol.animation.rotate({
+            rotation: rotation,
+            duration: this.duration,
+            easing: ol.easing.easeOut
+          })
+        );
+        this.map.view.rotation = 0;
+      }
+
+    });
+  </script>
+</polymer-element>
