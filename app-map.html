@@ -3,7 +3,17 @@
 
 <polymer-element name="app-map" attributes="map">
   <template>
-    <div fit id="map"></div>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <div id="map"></div>
     <content></content>
   </template>
   <script>
@@ -36,7 +46,8 @@
           })
         });
       },
-      attached: function() {
+
+      domReady: function() {
         this.map.updateSize();
       }
 
