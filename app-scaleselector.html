@@ -1,0 +1,18 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<polymer-element name="app-scaleselector" attributes="scales zoom">
+  <template>
+    <select on-change="{{onZoomChange}}">
+      <option template repeat="{{scale in scales}}" value="{{scale.zoom}}" selected?="{{scale.zoom == zoom}}">{{scale.label}}</option>
+    </select>
+  </template>
+  <script>
+    Polymer({
+
+      onZoomChange: function(event, detail, sender) {
+        this.zoom = parseInt(sender.value);
+      }
+
+    });
+  </script>
+</polymer-element>

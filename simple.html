@@ -18,6 +18,9 @@
     <link rel="import" href="app-reset-rotation.html">
     <link rel="import" href="app-geolocation.html">
 
+    <script src="http://openlayers.org/en/master/build/ol.js"></script>
+    <script src="https://cdn.rawgit.com/fredj/ol3-object-properties/master/dist/ol3-properties.min.js"></script>
+
     <style>
 
       core-header-panel {
@@ -50,31 +53,25 @@
   <body fullbleed unresolved>
 
     <template is="auto-binding">
-      <core-drawer-panel>
+      <core-drawer-panel drawerWidth="{{w}}">
         <core-header-panel mode="seamed" drawer>
-          <core-toolbar></core-toolbar>
+          <core-toolbar>drawer toolbar</core-toolbar>
           <core-menu fit>
             <app-layer-list layers="{{map.layers}}"></app-layer-list>
           </core-menu>
         </core-header-panel>
 
         <core-header-panel mode="seamed" main>
-          <!-- <core-toolbar> -->
-          <!--   <core-icon-button icon="menu" core-drawer-toggle></core-icon-button> -->
-          <!--   <span flex></span> -->
-          <!--   <app-search active horizontal layout flex></app-search> -->
-          <!-- </core-toolbar> -->
-
           <app-map fit map={{map}}>
-            <app-reset-rotation mini class="rotation" map={{map}}></app-reset-rotation>
-            <app-geolocation mini class="geolocation" map={{map}}></app-geolocation>
+            <input type="range" value="{{map.view.resolution}}">
+            <app-reset-rotation mini class="rotation" map="{{map}}"></app-reset-rotation>
+            <app-geolocation mini class="geolocation" map="{{map}}"></app-geolocation>
           </app-map>
 
         </core-header-panel>
       </core-drawer-panel>
     </template>
 
-    <script src="https://cdn.rawgit.com/fredj/ol3-object-properties/master/dist/ol3-properties.min.js"></script>
     <script src="simple.js"></script>
   </body>
 </html>

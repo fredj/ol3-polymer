@@ -1,6 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 
-<polymer-element name="app-map" attributes="map">
+<polymer-element name="app-countries-map" attributes="map feature">
   <template>
     <style>
       :host {
@@ -13,7 +13,6 @@
       }
     </style>
     <div id="map"></div>
-    <content></content>
   </template>
   <script>
     Polymer({
@@ -23,31 +22,36 @@
       ready: function() {
         this.map = new ol.Map({
           controls: [],
+          interactions: [],
           target: this.$.map,
           layers: [
             new ol.layer.Tile({
               label: 'osm',
               visible: true,
               source: new ol.source.OSM()
-            }),
-            new ol.layer.Tile({
-              label: 'stamen watercolor',
-              visible: false,
-              source: new ol.source.Stamen({
-                layer: 'watercolor'
-              })
             })
-          ],
-          view: new ol.View({
-            center: [907700, 5890660],
-            zoom: 8,
-            rotation: Math.PI / 3
-          })
+          ]
         });
+        this.featureOverlay_ = new ol.FeatureOverlay({
+          map: this.map
+        });
+      },
+
+      featureChanged: function(oldValue, newValue) {
+        this.featureOverlay_.features = [this.feature];
+        this.recenterToFeature();
+      },
+
+      recenterToFeature: function() {
+        var size = this.map.size;
+        if (size[0] && size[1] && this.feature && this.feature.geometry) {
+          this.map.view.fitExtent(this.feature.geometry.extent, this.map.size);
+        }
       },
 
       domReady: function() {
         this.map.updateSize();
+        this.recenterToFeature();
       }
 
     });
