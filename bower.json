@@ -1,0 +1,23 @@
+{
+  "name": "ol3-polymer",
+  "version": "3.11.2",
+  "description": "Import for the OpenLayers 3 library",
+  "private": true,
+  "authors": [
+    "Frederic Junod"
+  ],
+  "keywords": [
+    "polymer",
+    "ol3"
+  ],
+  "dependencies": {
+    "openlayers": "https://github.com/openlayers/ol3/releases/download/v3.11.2/v3.11.2-dist.zip"
+  },
+  "license": "http://www.wtfpl.net/txt/copying/",
+  "main": "ol3-import.html",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fredj/ol3-polymer.git"
+  },
+  "ignore": []
+}
