@@ -1,6 +1,6 @@
 {
   "name": "ol3-polymer",
-  "version": "3.11.2",
+  "version": "3.16.0",
   "description": "Import for the OpenLayers 3 library",
   "private": true,
   "authors": [
@@ -11,7 +11,7 @@
     "ol3"
   ],
   "dependencies": {
-    "openlayers": "https://github.com/openlayers/ol3/releases/download/v3.11.2/v3.11.2-dist.zip"
+    "openlayers": "https://github.com/openlayers/ol3/releases/download/v3.16.0/v3.16.0-dist.zip"
   },
   "license": "http://www.wtfpl.net/txt/copying/",
   "main": "ol3-import.html",
